@@ -1,0 +1,13 @@
+{
+  "name": "policy-survey",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "etlu03",
+  "description": "Simple web server to test Selenium",
+  "scripts": {
+    "start": "cd www && node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
