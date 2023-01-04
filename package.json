@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "etlu03",
-  "description": "Simple web server to test Selenium",
+  "description": "",
   "scripts": {
     "start": "cd www && node index.js"
   },
