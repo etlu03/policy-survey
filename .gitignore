@@ -22,3 +22,7 @@ package-lock.json
 next/
 .out
 out/
+
+# Storage files
+storage/*
+!storage/README.md

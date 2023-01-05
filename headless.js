@@ -1,4 +1,5 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require("puppeteer");
+const fs = require("fs");
 
 (async () => {
   const url = "https://www.cmu.edu/legal/privacy-notice.html";
@@ -12,8 +13,30 @@ const puppeteer = require('puppeteer');
   });
   await page.goto(url , {waitUntil: "load"});
 
-  const html = await page.content()
-  console.log(html);
+  const html = await page.content();
+
+  const title = await page.title();
+  const datetime = retrieve_time();
+  const filename = title + ": " + datetime + ".html"
+  
+  fs.writeFile("storage/" + filename, html, {encoding: "utf-8", flags: "w+"}, (err) => {
+    if (err != null) {
+      console.log(err)
+    }
+  });
 
   browser.close()
 })();
+
+function retrieve_time() {
+  const today = new Date()
+  const date = today.getFullYear() + '-' + 
+              (today.getMonth() + 1) + '-' + 
+               today.getDate();
+
+  const time = today.getHours() + ":" + 
+               today.getMinutes() + ":" + 
+               today.getSeconds();
+  
+  return date + " " + time;
+}
