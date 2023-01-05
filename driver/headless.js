@@ -16,10 +16,30 @@ const fs = require("fs");
   const html = await page.content();
 
   const title = await page.title();
-  const datetime = retrieve_time();
-  const filename = title + ": " + datetime + ".html"
-  
-  fs.writeFile("driver/storage/" + filename, html, {encoding: "utf-8", flags: "w+"}, (err) => {
+  const datetime = retrieve_timestamp();
+
+  const seperator = " => "
+  const filename = title + seperator + datetime + ".html"
+
+  const files = fs.readdirSync(__dirname + "/storage");
+  for (let i = 0; i < files.length; i++) {
+    let namespace = files[i].split(seperator, 2);
+    let name = namespace[0];
+    
+    if (name === title) {
+      fs.rename(__dirname + "/storage/" + files[i], 
+                __dirname + "/storage/" + filename, 
+                (err) => {
+        if (err != null) {
+          console.log(err)
+        }
+      });
+    }
+  }
+
+  fs.writeFile(__dirname + "/storage/" + filename, 
+               html, {encoding: "utf-8", flags: "w+"}, 
+               (err) => {
     if (err != null) {
       console.log(err)
     }
@@ -28,7 +48,7 @@ const fs = require("fs");
   browser.close()
 })();
 
-function retrieve_time() {
+function retrieve_timestamp() {
   const today = new Date()
   const date = today.getFullYear() + '-' + 
               (today.getMonth() + 1) + '-' + 
