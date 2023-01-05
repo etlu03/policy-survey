@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
-    "start": "next start",
+    "start": "node driver/headless.js",
     "serve": "npx serve out",
     "lint": "next lint"
   },

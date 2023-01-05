@@ -19,7 +19,7 @@ const fs = require("fs");
   const datetime = retrieve_time();
   const filename = title + ": " + datetime + ".html"
   
-  fs.writeFile("storage/" + filename, html, {encoding: "utf-8", flags: "w+"}, (err) => {
+  fs.writeFile("driver/storage/" + filename, html, {encoding: "utf-8", flags: "w+"}, (err) => {
     if (err != null) {
       console.log(err)
     }
