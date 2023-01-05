@@ -20,3 +20,5 @@ package-lock.json
 # next.js-related files
 .next
 next/
+.out
+out/
