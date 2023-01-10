@@ -31,7 +31,7 @@ const fs = require("fs");
                 __dirname + "/storage/" + filename, 
                 (err) => {
         if (err != null) {
-          console.log(err)
+          console.log(err);
         }
       });
     }
@@ -41,11 +41,11 @@ const fs = require("fs");
                html, {encoding: "utf-8", flags: "w+"}, 
                (err) => {
     if (err != null) {
-      console.log(err)
+      console.log(err);
     }
   });
-
-  browser.close()
+  
+  browser.close();
 })();
 
 function retrieve_timestamp() {

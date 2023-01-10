@@ -5,6 +5,7 @@ import requests
 from datetime import datetime
 from bs4 import BeautifulSoup as bs
 from bs4.element import Comment
+from urllib.parse import urlparse
 
 def retrieve_keywords():
   if os.path.isfile("concepts.txt") == False:
@@ -37,8 +38,9 @@ def is_visible(element):
 
 if __name__ == "__main__":
   page_url = "https://www.cmu.edu/legal/privacy-notice.html"
+
   retrieve_keywords()
-  
+
   r = requests.get(page_url)
   soup = bs(r.content, features="html.parser")
 
@@ -61,8 +63,10 @@ if __name__ == "__main__":
 
   json_object = {"_url": page_url,
                  "_title": page_title,
+                 "_page_timestamp": page_timestamp,
                  "_found_concepts": page_concepts, 
                  "_number_of_concepts": number_of_concepts}
   
-  with open(f"metadata/{page_title}", "w") as f:
+  destination = re.sub(r"\/*\/", "/", page_url).split('/')[1]
+  with open(f"metadata/{destination}.json", "w") as f:
     json.dump(json_object, f)
