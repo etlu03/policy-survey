@@ -2,10 +2,10 @@ import re
 import os
 import json
 import requests
+
 from datetime import datetime
 from bs4 import BeautifulSoup as bs
 from bs4.element import Comment
-from urllib.parse import urlparse
 
 def retrieve_keywords():
   if os.path.isfile("concepts.txt") == False:
@@ -67,6 +67,5 @@ if __name__ == "__main__":
                  "_found_concepts": page_concepts, 
                  "_number_of_concepts": number_of_concepts}
   
-  destination = re.sub(r"\/*\/", "/", page_url).split('/')[1]
-  with open(f"metadata/{destination}.json", "w") as f:
+  with open(f"metadata/{page_title}.json", "w") as f:
     json.dump(json_object, f)
