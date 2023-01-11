@@ -13,7 +13,7 @@ def retrieve_keywords():
       json_dict = json.load(json_file)
       objects = [re.sub("[_]", " ", json_key).strip() for json_key in json_dict]
 
-    objects.sort(key=lambda concept: len(concept))
+    objects.sort(key=len)
 
     with open("concepts.txt", "w") as text_file:
       while 0 < len(objects):
@@ -23,24 +23,28 @@ def retrieve_timestamp():
   now = datetime.now()
   date = now.today().strftime("%Y-%m-%d")
   time = now.strftime("%H:%M:%S")
-
   return date + " " + time
 
 def is_visible(element):
   non_visible = {"style", "script", "head", "title", "meta", "[document]"}
   if element.parent.name in non_visible:
     return False
-
   if isinstance(element, Comment):
     return False
-  
   return True
+
+def find_overlap(concept_spans, span):
+  (span_start, span_end) = span
+  for (start, end) in concept_spans:
+    if start <= span_start and span_end <= end:
+      return True
+  return False
 
 if __name__ == "__main__":
   page_url = "https://www.cmu.edu/legal/privacy-notice.html"
 
   retrieve_keywords()
-
+ 
   r = requests.get(page_url)
   soup = bs(r.content, features="html.parser")
 
@@ -52,22 +56,26 @@ if __name__ == "__main__":
   page_title = " ".join(soup.title.get_text().split())
   page_timestamp = retrieve_timestamp()
   
-  page_concepts = []
+  page_concepts = set()
   concept_spans = []
   with open("concepts.txt", "r") as f:
     for unstripped_line in f:
       concept = unstripped_line.strip()
-      match = re.search(rf"\b{concept}\b", text)
+      match = re.search(rf"(?i)\b{concept}\b", text)
       if match != None:
-        page_concepts.append(concept)
-        concept_spans.append(match.span())
-  print(concept_spans)
+        if find_overlap(concept_spans, match.span()) == False:
+          page_concepts.add(concept)
+          concept_spans.append(match.span())
+
   number_of_concepts = len(page_concepts)
+
+  found_concepts = list(page_concepts)
+  found_concepts.sort(key=lambda concept: -len(concept))
 
   json_object = {"_url": page_url,
                  "_title": page_title,
                  "_page_timestamp": page_timestamp,
-                 "_found_concepts": page_concepts, 
+                 "_found_concepts": found_concepts, 
                  "_number_of_concepts": number_of_concepts}
   
   with open(f"metadata/{page_title}.json", "w") as f:
