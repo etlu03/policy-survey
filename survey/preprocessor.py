@@ -7,15 +7,18 @@ from datetime import datetime
 from bs4 import BeautifulSoup as bs
 from bs4.element import Comment
 
+concepts_src = "objects.json"
+concepts_dst = "concepts.txt"
+
 def retrieve_keywords():
-  if os.path.isfile("concepts.txt") == False:
-    with open("objects.json", "r") as json_file:
+  if os.path.isfile(concepts_dst) == False:
+    with open(concepts_src, "r") as json_file:
       json_dict = json.load(json_file)
       objects = [re.sub("[_]", " ", json_key).strip() for json_key in json_dict]
 
     objects.sort(key=len)
 
-    with open("concepts.txt", "w") as text_file:
+    with open(concepts_dst, "w") as text_file:
       while 0 < len(objects):
         text_file.write(f"{objects.pop()}\n")
 
@@ -58,19 +61,20 @@ if __name__ == "__main__":
   
   page_concepts = set()
   concept_spans = []
-  with open("concepts.txt", "r") as f:
+  with open(concepts_dst, "r") as f:
     for unstripped_line in f:
       concept = unstripped_line.strip()
       match = re.search(rf"(?i)\b{concept}\b", text)
       if match != None:
-        if find_overlap(concept_spans, match.span()) == False:
+        span = match.span()
+        if find_overlap(concept_spans, span) == False:
           page_concepts.add(concept)
-          concept_spans.append(match.span())
+          concept_spans.append(span)
 
   number_of_concepts = len(page_concepts)
 
   found_concepts = list(page_concepts)
-  found_concepts.sort(key=lambda concept: -len(concept))
+  found_concepts.sort(key=len, reverse=True)
 
   json_object = {"_url": page_url,
                  "_title": page_title,
