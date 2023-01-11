@@ -26,14 +26,14 @@ const metadata_directory = "/metadata/";
   const filename = title + seperator + today + ".html";
   var first_instance = true;
 
-  const files = fs.readdirSync(__dirname + storage_directory);
+  const files = fs.readdirSync(`${__dirname}${storage_directory}`);
   for (let i = 0; i < files.length; i++) {
     let namespace = files[i].split(seperator, 2);
     let name = namespace[0];
     
     if (name === title) {
       first_instance = false;
-      fs.readFile(__dirname + metadata_directory + title + ".json", 
+      fs.readFile(`${__dirname}${metadata_directory}${title}.json`, 
                   (err, data) => {
                     if (err != null) {
                       console.log(err);
@@ -44,8 +44,8 @@ const metadata_directory = "/metadata/";
         let yesterday = json._page_timestamp;
 
         if (compare_timestamps(yesterday, today) === true) {
-          fs.rename(__dirname + storage_directory + files[i], 
-                    __dirname + storage_directory + filename, 
+          fs.rename(`${__dirname}${storage_directory}${files[i]}`, 
+                    `${__dirname}${storage_directory}${filename}`, 
                     (err) => {
                       if (err != null) {
                         console.log(err);
@@ -53,7 +53,7 @@ const metadata_directory = "/metadata/";
                       }
                    });
 
-          fs.writeFile(__dirname + storage_directory + filename,
+          fs.writeFile(`${__dirname}${storage_directory}${filename}`,
                        html, {encoding: "utf-8", flags: "w+"},
                        (err) => {
                         if (err != null) {
