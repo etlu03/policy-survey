@@ -53,12 +53,15 @@ if __name__ == "__main__":
   page_timestamp = retrieve_timestamp()
   
   page_concepts = []
+  concept_spans = []
   with open("concepts.txt", "r") as f:
     for unstripped_line in f:
       concept = unstripped_line.strip()
-      if re.search(rf"\b{concept}\b", text):
+      match = re.search(rf"\b{concept}\b", text)
+      if match != None:
         page_concepts.append(concept)
-  
+        concept_spans.append(match.span())
+  print(concept_spans)
   number_of_concepts = len(page_concepts)
 
   json_object = {"_url": page_url,

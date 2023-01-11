@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
-    "start": "node build/headless.js",
+    "start": "node survey/headless.js",
     "serve": "npx serve out",
     "lint": "next lint"
   },

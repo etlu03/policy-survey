@@ -24,7 +24,7 @@ next/
 out/
 
 # Storage files
-driver/storage/*
-!driver/storage/README.md
-driver/metadata/*
-!driver/metadata/README.md
+survey/storage/*
+!survey/storage/README.md
+survey/metadata/*
+!survey/metadata/README.md
