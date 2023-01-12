@@ -68,7 +68,7 @@ if __name__ == "__main__":
       if match != None:
         span = match.span()
         if find_overlap(concept_spans, span) == False:
-          page_concepts.add(concept)
+          page_concepts.add(concept.lower())
           concept_spans.append(span)
 
   number_of_concepts = len(page_concepts)
@@ -79,7 +79,7 @@ if __name__ == "__main__":
   json_object = {"_url": page_url,
                  "_title": page_title,
                  "_page_timestamp": page_timestamp,
-                 "_found_concepts": found_concepts, 
+                 "_found_concepts": found_concepts,
                  "_number_of_concepts": number_of_concepts}
   
   with open(f"metadata/{page_title}.json", "w") as f:
