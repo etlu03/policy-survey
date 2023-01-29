@@ -44,6 +44,24 @@ def find_overlap(concept_spans, span):
       return True
   return False
 
+def renew_audit(page_title, page_timestamp):
+  if os.path.isfile(f"metadata/{page_title}.json"):
+    with open(f"metadata/{page_title}.json", "r") as json_file:
+      json_dict = json.load(json_file)
+      yesterday = json_dict["_page_timestamp"].split(" ")[1]
+      today = page_timestamp.split(" ")[1]
+
+      t1 = datetime.strptime(yesterday, "%H:%M:%S")
+      t2 = datetime.strptime(today, "%H:%M:%S")
+
+      delta = t2 - t1
+      if delta.days > 30:
+        return True
+
+      return False
+
+  return True
+
 if __name__ == "__main__":
   page_url = "https://www.cmu.edu/legal/privacy-notice.html"
 
@@ -52,37 +70,38 @@ if __name__ == "__main__":
   r = requests.get(page_url)
   soup = bs(r.content, features="html.parser")
 
-  nodes = soup.findAll(text=True)
-  visible_text = filter(is_visible, nodes)
-
-  text = " ".join(t.strip() for t in visible_text)
-
   page_title = " ".join(soup.title.get_text().split())
   page_timestamp = retrieve_timestamp()
   
-  page_concepts = set()
-  concept_spans = []
-  with open(concepts_dst, "r") as f:
-    for unstripped_line in f:
-      concept = unstripped_line.strip()
-      match = re.search(rf"(?i)\b{concept}\b", text)
-      if match != None:
-        span = match.span()
-        if find_overlap(concept_spans, span) == False:
-          page_concepts.add(concept.lower())
-          concept_spans.append(span)
+  if renew_audit(page_title, page_timestamp) == True:
+    nodes = soup.findAll(text=True)
+    visible_text = filter(is_visible, nodes)
 
-  number_of_concepts = len(page_concepts)
+    text = " ".join(t.strip() for t in visible_text)
 
-  found_concepts = list(page_concepts)
-  found_concepts.sort(key=len, reverse=True)
+    page_concepts = set()
+    concept_spans = []
+    with open(concepts_dst, "r") as f:
+      for unstripped_line in f:
+        concept = unstripped_line.strip()
+        match = re.search(rf"(?i)\b{concept}\b", text)
+        if match != None:
+          span = match.span()
+          if find_overlap(concept_spans, span) == False:
+            page_concepts.add(concept.lower())
+            concept_spans.append(span)
 
-  json_object = {"_url": page_url,
-                 "_title": page_title,
-                 "_page_timestamp": page_timestamp,
-                 "_found_concepts": found_concepts,
-                 "_number_of_concepts": number_of_concepts}
-  print(found_concepts)
-  
-  with open(f"metadata/{page_title}.json", "w") as f:
-    json.dump(json_object, f)
+    number_of_concepts = len(page_concepts)
+
+    found_concepts = list(page_concepts)
+    found_concepts.sort(key=len, reverse=True)
+
+    json_object = {"_url": page_url,
+                  "_title": page_title,
+                  "_page_timestamp": page_timestamp,
+                  "_found_concepts": found_concepts,
+                  "_number_of_concepts": number_of_concepts}
+    print(found_concepts)
+    
+    with open(f"metadata/{page_title}.json", "w") as f:
+      json.dump(json_object, f)

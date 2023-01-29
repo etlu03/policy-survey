@@ -109,24 +109,24 @@ function retrieve_timestamp() {
   return date + " " + time;
 }
 
-function renew_audit(timestamp1, timestamp2) {
-  const time1 = timestamp1.split(/[: -]/);
-  const time2 = timestamp2.split(/[: -]/);
+function renew_audit(time1, time2) {
+  const t1 = time1.split(/[: -]/);
+  const t2 = time2.split(/[: -]/);
 
-  for (let i = 0; i < time1.length; i++) {
-    if (time1[i].length < 2) {
-      time1[i] = "0" + time1[i];
+  for (let i = 0; i < t1.length; i++) {
+    if (t1[i].length < 2) {
+      t1[i] = "0" + t1[i];
     }
   }
 
-  for (let i = 0; i < time2.length; i++) {
-    if (time2[i].length < 2) {
-      time2[i] = "0" + time2[i];
+  for (let i = 0; i < t2.length; i++) {
+    if (t2[i].length < 2) {
+      t2[i] = "0" + t2[i];
     }
   }
 
-  const date1 = new Date(time1[0] + "/" + time1[1] + "/" + time1[2]);
-  const date2 = new Date(time2[0] + "/" + time2[1] + "/" + time2[2]);
+  const date1 = new Date(t1[0] + "/" + t1[1] + "/" + t1[2]);
+  const date2 = new Date(t2[0] + "/" + t2[1] + "/" + t2[2]);
 
   const diff = (date2.getTime() - date1.getTime()) / (1000 * 3600 * 24);
 
