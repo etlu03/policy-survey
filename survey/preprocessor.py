@@ -17,6 +17,7 @@ def retrieve_keywords():
       objects = [re.sub("[_]", " ", json_key).strip() for json_key in json_dict]
 
     objects.sort(key=len)
+    objects = list(filter(lambda concept: " " in concept, objects))
 
     with open(concepts_dst, "w") as text_file:
       while 0 < len(objects):
@@ -81,6 +82,7 @@ if __name__ == "__main__":
                  "_page_timestamp": page_timestamp,
                  "_found_concepts": found_concepts,
                  "_number_of_concepts": number_of_concepts}
+  print(found_concepts)
   
   with open(f"metadata/{page_title}.json", "w") as f:
     json.dump(json_object, f)

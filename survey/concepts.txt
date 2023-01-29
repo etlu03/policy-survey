@@ -1285,7 +1285,6 @@ personal account
 optional account
 operating policy
 online collected
-non-identifiable
 n1-click setting
 telephone number
 mobile telephone
@@ -1316,7 +1315,6 @@ internet address
 visitor location
 information sign
 information page
-individual-level
 in-store network
 highly sensitive
 internet service
@@ -1348,7 +1346,6 @@ customer support
 customer service
 customer account
 telephone charge
-creditworthiness
 cookie id number
 contributor name
 contact importer
@@ -1469,13 +1466,11 @@ living location
 search behavior
 internet access
 instore visitor
-personalization
 instant message
 online activity
 security camera
 ibm coremetrics
 household watch
-hospitalization
 hiv test result
 graduation year
 gps coordinates
@@ -1494,7 +1489,6 @@ deposit history
 person timeline
 deceased person
 debit card pins
-de-personalized
 data downloaded
 data collection
 customer survey
@@ -1585,7 +1579,6 @@ referring page
 referral email
 record profile
 record history
-recommendation
 public profile
 public comment
 telephone call
@@ -1594,7 +1587,6 @@ product review
 product return
 product recall
 private resume
-responsibility
 pricing change
 posted content
 postal address
@@ -1604,8 +1596,6 @@ patient record
 opt-out cookie
 online account
 nrds id number
-non-personally
-non-aggregated
 network update
 money transfer
 mobile service
@@ -1651,7 +1641,6 @@ telephone bill
 customer email
 custom content
 current charge
-correspondence
 cookie setting
 contact reason
 contact detail
@@ -1659,7 +1648,6 @@ closed account
 treatment date
 service option
 chosen service
-characteristic
 channel tuning
 calling number
 calendar entry
@@ -1689,7 +1677,6 @@ site user data
 payment detail
 metrics report
 message sender
-identification
 id information
 credit history
 physical thing
@@ -1710,7 +1697,6 @@ unique device
 unique cookie
 timeline item
 website login
-telemarketing
 story keyword
 status update
 social plugin
@@ -1722,7 +1708,6 @@ service level
 service email
 service class
 serial number
-self-reported
 secret answer
 search engine
 saliva sample
@@ -1734,7 +1719,6 @@ received list
 rating survey
 random number
 signal timing
-questionnaire
 purchase date
 provider site
 profile photo
@@ -1755,8 +1739,6 @@ order history
 policy change
 number texted
 number called
-non-published
-non-microsoft
 number dialed
 mutual friend
 shopping list
@@ -1770,9 +1752,6 @@ local service
 link followed
 landlord name
 joined member
-qualification
-informational
-independently
 incoming call
 in-store wifi
 wi-fi network
@@ -1782,12 +1761,10 @@ mini database
 local storage
 hospital room
 health record
-participation
 group content
 google cookie
 gift registry
 inferred name
-functionality
 friend search
 story comment
 friend finder
@@ -1798,7 +1775,6 @@ feature usage
 member record
 family member
 facebook page
-environmental
 email service
 email message
 email address
@@ -1807,22 +1783,18 @@ dollar amount
 device status
 device number
 installed app
-de-identified
 data analytic
-customization
 support email
 customer name
 customer list
 customer data
 current title
-crowd-sourced
 credit report
 customer code
 course taught
 cookie policy
 cookie placed
 cookie number
-configuration
 website visit
 chosen option
 check cashing
@@ -1836,23 +1808,19 @@ browsing data
 blood glucose
 basic account
 baby registry
-automatically
 analyze trend
 ad view count
 ad impression
 website usage
 service usage
 search result
-registeration
 purchase data
 product usage
 network usage
 location data
 interest data
 computer data
-communication
 call location
-advertisement
 activity data
 work address
 web page url
@@ -1861,10 +1829,8 @@ video opened
 web browsing
 usage choice
 time elapsed
-thirdy-party
 tagged story
 tagged photo
-subsequently
 spouses name
 site visitor
 site feature
@@ -1876,7 +1842,6 @@ service date
 sent content
 search query
 risk profile
-relationship
 related data
 record grant
 recent order
@@ -1887,13 +1852,9 @@ proxy server
 web analytic
 viewing data
 profile name
-professional
-pornographic
 photo shared
 photo center
 user profile
-personalized
-pay-per-view
 profile page
 user account
 paid listing
@@ -1903,9 +1864,7 @@ order status
 order number
 page content
 online photo
-non-personal
 site visited
-navigational
 movie viewed
 movie rented
 movie rental
@@ -1915,7 +1874,6 @@ message time
 message sent
 text message
 mailing list
-solicitation
 mail address
 storage help
 link clicked
@@ -1923,12 +1881,9 @@ legal status
 kik username
 job industry
 item browsed
-individually
 income range
 inbound call
 wifi address
-verification
-identifiable
 html5 cookie
 home address
 gps location
@@ -1940,33 +1895,25 @@ fitness data
 feature used
 facebook app
 order update
-subscription
 doctor notes
 user content
 device usage
 phone number
-manufacturer
 device count
 device brand
 debit number
 use practice
-transmission
 current city
 credit usage
 credit score
-notification
 cpni consent
 coupon usage
 contact list
 contact data
 contact book
-confirmation
-compensation
 company size
 company page
 company name
-commercially
-collaborator
 chat session
 card payment
 calling name
@@ -1974,27 +1921,19 @@ cable device
 mail service
 browser type
 plug-in type
-businessweek
 billing code
 bill payment
 bank routing
-availability
 area visited
 web behavior
-announcement
 activity log
 account user
 traffic data
 social media
 service data
-registration
-prescription
 payment card
 message data
-installation
 insight data
-geo-location
-foot-traffic
 email header
 click stream
 browser data
@@ -2007,29 +1946,17 @@ web address
 voice input
 video usage
 usage habit
-undelivered
-ultraviolet
-third-party
 test answer
-sweepstakes
-surrounding
 store wi-fi
-statistical
 sms service
 sms address
 visit trend
 server logs
 search term
 screen name
-residential
 quiz answer
-promotional
-programming
-prescreened
 postal mail
 postal code
-volunteered
-personality
 page viewed
 page search
 online data
@@ -2043,90 +1970,47 @@ lowes store
 linkedin ad
 work status
 kik content
-instruction
-transmitted
-in-facility
-improvement
-immigration
-identifying
 http cookie
 room number
 test result
-healthvault
 health care
 game played
 full record
 friend name
-first-party
-transferred
 file shared
 family size
 exiting url
-endorsement
-educational
-sub-account
 domain name
-whereabouts
 device used
 device type
-geolocation
-destination
-description
 use concern
 data string
-testimonial
-proprietary
 custom link
 cover photo
-coremetrics
-coordinates
-contributor
 cpni notice
 click count
-cholesterol
-pornography
 child image
-certificate
 call record
 cable modem
 member name
 book opened
 friend list
 best friend
-behavioural
 bank number
 backup copy
 cpni policy
-arrangement
-approximate
-appointment
-anonymizing
-alternative
-affiliation
-advertising
 ad response
-accuweather
 access time
 access date
-credentials
 access code
 website log
-transaction
 set-top box
-performance
-measurement
-maintenance
-interaction
 health data
 device data
-demographic
 credit card
-clickstream
 card number
 card detail
 camera data
-application
-information
 work email
 web server
 web beacon
@@ -2138,894 +2022,113 @@ user trend
 user input
 user habit
 usage date
-up-to-date
-unresolved
-university
 unique ids
 u-verse tv
 tv viewing
-viewership
 time stamp
 time spent
-sweepstake
-suggestion
 sound file
 site visit
 start time
-searchable
-respective
-repetitive
-purchasing
 pulse rate
 profile id
-previously
-plain-text
-photograph
-pharmacist
-personally
-persistent
 page visit
 open email
-occupation
 nook press
-non-public
-networking
-navigation
-multi-site
-mouse-over
-monitoring
 mobile app
-mistakenly
-medication
 store area
 login name
-permission
 job search
-invitation
-individual
-inaccurate
 lab result
-high-speed
-graduation
-geographic
-friendship
-frequently
 first name
-government
 fax number
 page liked
-expiration
-enthusiast
-electronic
 e-mail use
-newsletter
-disclosure
-difference
 device ids
-department
 date stamp
-downloaded
-credential
 cookie set
-contractor
 forum post
-commercial
-collective
 usage time
-subpoenaed
 child name
-subscriber
 ip address
 cell tower
-cardholder
-television
 browser id
 brand name
 birth year
 birth date
-behavioral
 basic info
-background
-authorized
-assistance
 asset view
-applicable
 user usage
-anonymized
-annotation
 aid number
-statistics
-aggregated
-technology
 view count
 ad service
 ad network
 ad clicked
-acceptance
-visitation
 usage data
 site usage
-redemption
-preference
-membership
-impression
-identifier
-experience
-enrollment
-employment
 debit card
-conversion
-connection
-compliance
-collection
 wish list
 web usage
-view-only
-unsecured
 tv remote
-timestamp
 time zone
 text file
-temporary
-technical
-substance
-submitted
-streaming
 sport fan
 site area
 set count
 stop time
-seniority
-searching
-scrolling
-schooling
-resulting
-religious
-referring
-reference
 real name
-real-time
-protected
-promotion
-selection
-requested
-preferred
 pixel tag
 pet owner
 page view
 page turn
-purchased
-optimized
-operating
-on-demand
-reminders
 news feed
-objective
-telephone
-microsoft
-recipient
-marketing
-longitude
-listmania
-listening
 link seen
 last seen
 last name
 job title
-invention
-reporting
-messaging
-installed
 image url
-household
 host name
 home page
-sensitive
-insurance
-operation
-glassdoor
 gift card
-geography
-generated
 full name
-parameter
-frequency
-financial
-favorites
 eye color
 exit page
-executive
-ethnicity
 user name
-emergency
-displayed
-discharge
-publisher
-directory
-different
-diagnosis
-phonebook
 device id
-delivered
-custodian
 cpni rule
 id number
 cookie id
-condition
-community
-personnel
 clear gif
 chat room
 chat area
 card pins
 car owner
 bulk mail
-broadband
-bloomberg
-statement
-behaviour
-bandwidth
-available
-collected
 area code
 user data
-anonymous
-agreement
-aggregate
 age range
 age group
-age-range
 unique id
-treatment
-subdomain
 site user
-equipment
-education
-complaint
 app usage
-zip-code
-wireless
-visiting
 vendor s
 user pii
-upstream
-uploaded
-unlisted
-transmit
-targeted
-tailored
-supplied
-strategy
-snapchat
-snapcash
-strength
-shipping
-shipment
-security
-searched
-research
-required
-reported
-relevant
-relative
-regional
 web site
-recently
-question
-quantity
-publicly
-promoted
-programs
-profiled
-physical
 web page
-pharmacy
-personal
-timeline
-periodic
 page url
-outgoing
-outbound
-optional
-reminder
-occasion
-obtained
-nickname
-n23andme
-n1-click
-multiple
-transfer
-messaged
-received
 login id
-linkedin
-latitude
-landlord
-protocol
-material
-inferred
-industry
-incoming
-shopping
-in-store
-identity
-hospital
 hiv test
-internet
-headline
-genotype
-function
 user ids
 friend s
-frequent
-military
-follower
-firmware
-feedback
-favorite
-platform
-facebook
-existing
-username
-everyone
-exposure
-employee
-duration
-download
-donation
-document
-distance
-incident
-detailed
-deceased
 data use
-database
-customer
-criminal
-gathered
-importer
-consumer
-software
-hardware
-complete
-followed
-practice
-clinical
-children
-check-in
 tower id
-category
-provider
-offering
-campaign
-calendar
-bulletin
-movement
-browsing
-language
-bookmark
-birthday
-balances
-registry
-audience
-attached
 app used
 zip code
-tracking
-analytic
-business
-provided
-reaction
-response
-accurate
-property
-modifier
-referral
-purchase
-property
-projects
-password
 log file
 log data
-location
-interest
-exchange
-delivery
-computer
-behavior
 ad click
-activity
-welcome
-wedding
-weather
-walmart
-verizon
-updated
-tobacco
-symptom
-surname
-student
-spouses
-sponsor
-special
-sign-in
-watched
-serving
-sensing
-roaming
-related
-regular
-process
-problem
-private
-privacy
-primary
-pricing
-precise
-picture
-patient
-package
-overall
-opt-out
-offline
-monthly
-minimum
-metrics
-medical
-mailing
-storage
-limited
-keyword
-visitor
-instore
-instant
-inmails
-subject
-inbound
-helpful
-graphic
-genetic
-general
-foreign
-fitness
-version
-federal
-ordered
-faculty
-express
-exiting
-elapsed
-purpose
-disease
-digital
-desktop
-deposit
-support
-current
-country
-setting
-context
-contest
-sharing
-consent
-concern
-concept
-comment
-college
-charter
-channel
-certain
-cashing
-carrier
-company
-pattern
-feature
-calling
-plug-in
-browsed
-bracket
-glucose
-billing
-barcode
-routing
-artwork
-article
-visited
-archive
-viewing
-u-verse
-analyze
-allergy
-aerobic
-partner
-adverse
-contact
 ad view
 ad seen
-clicked
-summary
 user id
-content
-request
-website
-traffic
-session
-service
-program
-profile
-product
-payment
-outcome
-network
-message
-listing
-license
-insight
-history
-browser
-address
 ad data
-account
-weight
-visual
-viewer
-unique
-tissue
-tagged
-system
-synced
-street
-social
-timing
-serial
-seller
-sample
-saliva
-safety
-remote
-region
-refund
-recent
-rebate
-rating
-random
-signal
-recall
-posted
-postal
-plugin
-people
-secret
-online
-texted
-update
-mutual
-rented
-rental
-mobile
-minute
-sender
-screen
-mental
-luxury
-locale
-living
-length
-joined
-invite
-inmail
-public
-income
-highly
-height
-google
-genome
-gender
-played
-search
-finder
-shared
-family
-ethnic
-entire
-effort
-e-mail
-driver
-dollar
-doctor
-dialed
-person
-string
-survey
-review
-custom
-notice
-taught
-coupon
-placed
-reason
-common
-closed
-clinic
-option
-chosen
-choice
-tuning
-census
-detail
-called
-cached
-buying
-member
-method
-opened
-friend
-backup
-audits
-policy
-charge
-answer
-amount
-agency
-viewed
-change
 ad tag
-acuity
-action
-stream
-status
-signin
-server
-return
-resume
-result
-report
-record
-number
-health
-header
-domain
-device
-credit
-course
-cookie
-camera
-beacon
-access
-entity
-action
-webmd
-voice
-vital
-virus
-video
-topic
-thing
-state
-start
-staff
-sport
-spent
-sound
-skill
-short
-radio
-query
-pulse
-proxy
-prior
-place
-pixel
-trait
-party
-paper
-visit
-other
-organ
-offer
-nurse
-money
-lowes
-local
-likes
-liked
-legal
-issue
-wi-fi
-html5
-watch
-honor
-model
-habit
-guest
-grant
-flash
-first
-music
-exact
-event
-error
-notes
-diner
-delay
-debit
-title
-photo
-cover
-speed
-color
-count
-clear
-class
-civil
-level
-image
-child
-check
-chats
-tower
-owner
-entry
-modem
-cable
-broad
-brand
-board
-blood
-birth
-basic
-award
-audio
-asset
-trend
-alias
-alert
-range
-group
-adult
-story
-score
-abuse
-usage
-track
-store
-stamp
-share
-phone
-order
-movie
-login
-input
-forum
-email
-click
-cache
-brand
-agent
-work
-wish
-uuid
-udid
-text
-stop
-snap
-show
-term
-sale
-risk
-real
-read
-race
-quiz
-push
-rate
-poll
-paid
-turn
-oral
-open
-nrds
-next
-news
-most
-mini
-sent
-menu
-mayo
-make
-logs
-line
-lead
-last
-sign
-wifi
-idea
-http
-host
-home
-test
-help
-gift
-game
-full
-post
-form
-goal
-fios
-exit
-debt
-link
-rule
-size
-page
-city
-room
-chat
-cell
-pins
-call
-mail
-bulk
-type
-name
-book
-blog
-year
-bill
-best
-info
-bank
-copy
-baby
-area
-used
-view
-seen
-user
-data
-time
-date
-code
-sync
-site
-list
-item
-file
-cpni
-cart
-card
-zip
-web
-sms
-sex
-pii
-pet
-old
-new
-mac
-lab
-kik
-job
-ibm
-hiv
-fax
-fan
-eye
-url
-dna
-ids
-use
-set
-gif
-car
-att
-aid
-age
-tag
-log
-gps
-app
-gs
-tv
-id
-ad
