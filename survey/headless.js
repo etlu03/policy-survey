@@ -6,6 +6,8 @@ const seperator = " -- ";
 const storage_directory = "/templates/";
 const metadata_directory = "/metadata/";
 
+var filename = "";
+
 (async () => {
   const url = "https://www.cmu.edu/legal/privacy-notice.html";
   const browser = await puppeteer.launch();
@@ -19,63 +21,77 @@ const metadata_directory = "/metadata/";
   await page.goto(url , {waitUntil: "load"});
 
   const html = await page.content();
-
   const title = await page.title();
+
   const today = retrieve_timestamp();
 
-  const filename = title + seperator + today + ".html";
   var first_instance = true;
-
   const files = fs.readdirSync(`${__dirname}${storage_directory}`);
   for (let i = 0; i < files.length; i++) {
     let namespace = files[i].split(seperator, 2);
-    let name = namespace[0];
-    
-    if (name === title) {
+    let pagename = namespace[0];
+
+    if (pagename === title) {
       first_instance = false;
       fs.readFile(`${__dirname}${metadata_directory}${title}.json`, 
-                  (err, data) => {
-                    if (err != null) {
-                      console.log(err);
-                      return;
-                    }
-
-        let json = JSON.parse(data);
-        let yesterday = json._page_timestamp;
-
-        if (renew_audit(yesterday, today) === true) {
-          fs.rename(`${__dirname}${storage_directory}${files[i]}`, 
-                    `${__dirname}${storage_directory}${filename}`, 
-                    (err) => {
+                    (err, data) => {
                       if (err != null) {
                         console.log(err);
                         return;
                       }
-                   });
 
-          fs.writeFile(`${__dirname}${storage_directory}${filename}`,
-                       html, {encoding: "utf-8", flags: "w+"},
-                       (err) => {
+          let json = JSON.parse(data);
+          let yesterday = json._page_timestamp;
+
+          if (renew_audit(yesterday, today) === true) {
+            fs.rename(`${__dirname}${storage_directory}${files[i]}`, 
+                      `${__dirname}${storage_directory}${filename}`, 
+                      (err) => {
                         if (err != null) {
                           console.log(err);
                           return;
                         }
                       });
-        }
+
+            fs.writeFile(`${__dirname}${storage_directory}${filename}`,
+                          html, {encoding: "utf-8", flags: "w+"},
+                          (err) => {
+                            if (err != null) {
+                              console.log(err);
+                              return;
+                            }
+                          });
+          } else {
+            filename = title + seperator + yesterday + ".html";
+          }
       });
+      break;
     }
   }
 
-  if (first_instance == true) {
-    fs.writeFile(__dirname + storage_directory + filename,
-                 html, {encoding: "utf-8", flags: "w+"},
-                 (err) => {
-                  if (err != null) {
-                    console.log(err);
-                    return;
-                  }
-                });
-  }
+  if (first_instance === true) {
+    fs.readFile(`${__dirname}${metadata_directory}${title}.json`, 
+                    (err, data) => {
+                      if (err != null) {
+                        console.log(err);
+                        return;
+                      }
+
+          let json = JSON.parse(data);
+          let yesterday = json._page_timestamp;
+
+          filename = title + seperator + yesterday + ".html";
+
+          fs.writeFile(`${__dirname}${storage_directory}${filename}`,
+                          html, {encoding: "utf-8", flags: "w+"},
+                          (err) => {
+                            if (err != null) {
+                              console.log(err);
+                              return;
+                            }
+                          });
+    });
+  }  
 
   browser.close();
 })();
