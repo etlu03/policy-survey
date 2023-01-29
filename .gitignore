@@ -26,7 +26,7 @@ out/
 package-lock.json
 
 # Storage files
-survey/storage/*
-!survey/storage/README.md
+survey/templates/*
+!survey/templates/README.md
 survey/metadata/*
 !survey/metadata/README.md

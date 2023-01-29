@@ -1,9 +1,9 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
 
-const seperator = " => ";
+const seperator = " -- ";
 
-const storage_directory = "/storage/";
+const storage_directory = "/templates/";
 const metadata_directory = "/metadata/";
 
 (async () => {
@@ -43,7 +43,7 @@ const metadata_directory = "/metadata/";
         let json = JSON.parse(data);
         let yesterday = json._page_timestamp;
 
-        if (compare_timestamps(yesterday, today) === true) {
+        if (renew_audit(yesterday, today) === true) {
           fs.rename(`${__dirname}${storage_directory}${files[i]}`, 
                     `${__dirname}${storage_directory}${filename}`, 
                     (err) => {
@@ -93,7 +93,7 @@ function retrieve_timestamp() {
   return date + " " + time;
 }
 
-function compare_timestamps(timestamp1, timestamp2) {
+function renew_audit(timestamp1, timestamp2) {
   const time1 = timestamp1.split(/[: -]/);
   const time2 = timestamp2.split(/[: -]/);
 
