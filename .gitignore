@@ -15,13 +15,15 @@ venv.bak/
 # npm-related files
 .node_modules
 node_modules/
-package-lock.json
 
 # next.js-related files
 .next
 next/
 .out
 out/
+
+# package-lock.json
+package-lock.json
 
 # Storage files
 survey/storage/*
