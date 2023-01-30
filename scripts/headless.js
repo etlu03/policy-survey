@@ -6,10 +6,11 @@ const seperator = " -- ";
 const storage_directory = "/templates/";
 const metadata_directory = "/metadata/";
 
-var filename = "";
+var filename = undefined;
+
+const url = process.argv.slice(1)[1];
 
 (async () => {
-  const url = "https://www.cmu.edu/legal/privacy-notice.html";
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 

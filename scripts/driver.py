@@ -1,5 +1,17 @@
 import os
+import argparse
+
+def main():
+  parser = argparse.ArgumentParser(description="Feed privacy notice to audit")
+  parser.add_argument(
+        "--url", "-u", action="store", help="URL of privacy notice", required=True
+  )
+  args = parser.parse_args()
+
+  url = args.url
+  os.system(f"python3 preprocessor.py --url {url}")
+  os.system(f"node headless.js {url}")
+  
 
 if __name__ == "__main__":
-  os.system("python3 preprocessor.py")
-  os.system("node headless.js")
+  main()

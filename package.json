@@ -5,7 +5,7 @@
   "author": "etlu03",
   "description": "",
   "scripts": {
-    "start": "node survey/headless.js"
+    "start": "node scripts/headless.js"
   },
   "dependencies": {
     "fs": "^0.0.1-security",

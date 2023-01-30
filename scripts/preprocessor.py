@@ -2,6 +2,7 @@ import requests
 import json
 import re
 import os
+import argparse
 
 from datetime import datetime
 from bs4 import BeautifulSoup as bs
@@ -62,11 +63,7 @@ def renew_audit(page_title, page_timestamp):
 
   return True
 
-if __name__ == "__main__":
-  page_url = "https://www.cmu.edu/legal/privacy-notice.html"
-
-  retrieve_keywords()
- 
+def main(page_url):
   r = requests.get(page_url)
   soup = bs(r.content, features="html.parser")
 
@@ -105,3 +102,15 @@ if __name__ == "__main__":
     
     with open(f"metadata/{page_title}.json", "w") as f:
       json.dump(json_object, f)
+
+if __name__ == "__main__":
+  parser = argparse.ArgumentParser(description="Feed privacy notice to audit")
+  parser.add_argument(
+        "--url", "-u", action="store", help="URL of privacy notice", required=True
+  )
+  args = parser.parse_args()
+  url = args.url
+
+  retrieve_keywords()
+
+  main(url)
