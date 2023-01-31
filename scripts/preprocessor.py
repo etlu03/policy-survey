@@ -1,15 +1,16 @@
+from bs4 import BeautifulSoup as bs
+from bs4.element import Comment
+from datetime import datetime
 import requests
 import json
 import re
-import os
 import argparse
-
-from datetime import datetime
-from bs4 import BeautifulSoup as bs
-from bs4.element import Comment
+import os
 
 concepts_src = "objects.json"
 concepts_dst = "concepts.txt"
+
+metadata_dst = "metadata/"
 
 def retrieve_keywords():
   if os.path.isfile(concepts_dst) == False:
@@ -100,7 +101,7 @@ def main(page_url):
                   "_number_of_concepts": number_of_concepts}
     print(found_concepts)
     
-    with open(f"metadata/{page_title}.json", "w") as f:
+    with open(f"{metadata_dst}{page_title}.json", "w") as f:
       json.dump(json_object, f)
 
 if __name__ == "__main__":

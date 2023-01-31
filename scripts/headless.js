@@ -3,7 +3,7 @@ const fs = require("fs");
 
 const seperator = " -- ";
 
-const storage_directory = "/templates/";
+const storage_directory = "/static/";
 const metadata_directory = "/metadata/";
 
 var filename = undefined;
