@@ -7,8 +7,8 @@ import re
 import argparse
 import os
 
-concepts_src = "objects.json"
-concepts_dst = "concepts.txt"
+concepts_src = "../storage/" + "objects.json"
+concepts_dst = "../storage/" + "concepts.txt"
 
 metadata_dst = "metadata/"
 

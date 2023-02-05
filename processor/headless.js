@@ -3,8 +3,8 @@ const fs = require("fs");
 
 const seperator = " -- ";
 
-const storage_directory = "/static/";
-const metadata_directory = "/metadata/";
+const flask_directory = "../flaskr/templates/";
+const storage_directory = "../storage/metadata/";
 
 var filename = undefined;
 
@@ -27,14 +27,14 @@ const url = process.argv.slice(1)[1];
   const today = retrieve_timestamp();
 
   var first_instance = true;
-  const files = fs.readdirSync(`${__dirname}${storage_directory}`);
+  const files = fs.readdirSync(`${flask_directory}`);
   for (let i = 0; i < files.length; i++) {
     let namespace = files[i].split(seperator, 2);
     let pagename = namespace[0];
 
     if (pagename === title) {
       first_instance = false;
-      fs.readFile(`${__dirname}${metadata_directory}${title}.json`, 
+      fs.readFile(`${storage_directory}${title}.json`, 
                     (err, data) => {
                       if (err != null) {
                         console.log(err);
@@ -45,8 +45,8 @@ const url = process.argv.slice(1)[1];
           let yesterday = json._page_timestamp;
 
           if (renew_audit(yesterday, today) === true) {
-            fs.rename(`${__dirname}${storage_directory}${files[i]}`, 
-                      `${__dirname}${storage_directory}${filename}`, 
+            fs.rename(`${flask_directory}${files[i]}`, 
+                      `${flask_directory}${filename}`, 
                       (err) => {
                         if (err != null) {
                           console.log(err);
@@ -54,7 +54,7 @@ const url = process.argv.slice(1)[1];
                         }
                       });
 
-            fs.writeFile(`${__dirname}${storage_directory}${filename}`,
+            fs.writeFile(`${flask_directory}${filename}`,
                           html, {encoding: "utf-8", flags: "w+"},
                           (err) => {
                             if (err != null) {
@@ -71,7 +71,7 @@ const url = process.argv.slice(1)[1];
   }
 
   if (first_instance === true) {
-    fs.readFile(`${__dirname}${metadata_directory}${title}.json`, 
+    fs.readFile(`${storage_directory}${title}.json`, 
                     (err, data) => {
                       if (err != null) {
                         console.log(err);
@@ -83,7 +83,7 @@ const url = process.argv.slice(1)[1];
 
           filename = title + seperator + yesterday + ".html";
 
-          fs.writeFile(`${__dirname}${storage_directory}${filename}`,
+          fs.writeFile(`${flask_directory}${filename}`,
                           html, {encoding: "utf-8", flags: "w+"},
                           (err) => {
                             if (err != null) {
