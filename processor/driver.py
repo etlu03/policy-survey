@@ -14,6 +14,5 @@ def main():
   os.system(f"node headless.js {url}")
   os.system(f"python3 build.py --url {url}")
   
-
 if __name__ == "__main__":
   main()
