@@ -1,31 +1,17 @@
-from flask import Flask, render_template
+from flask import Flask
 from bs4 import BeautifulSoup as bs
-import requests
+
+import os
 import argparse
-import os 
+import requests
 
-app = Flask(__name__)
-storage_directory = "static/"
+seperator = " -- ";
+templates_directory = "templates/"
 
-# view as name (templates)
-@app.route("/")
-def build(files):
-  return render_template(storage_directory + files)
+def issue_report(html):
+  return f"<p>{html}</p>"
 
 if __name__ == "__main__":
-  # this could moved into a function to call (convention stuff)
-  '''
-  app.run()?
-  '''
-  '''
-  #!/bin/sh
-
-  export FLASK_APP=application.py
-  export FLASK_DEBUG=1
-  export FLASK_RUN_PORT=5001
-
-  flask run
-  '''
   parser = argparse.ArgumentParser(description="Feed privacy notice to audit")
   parser.add_argument(
         "--url", "-u", action="store", help="URL of privacy notice", required=True
@@ -33,12 +19,15 @@ if __name__ == "__main__":
   args = parser.parse_args()
 
   url = args.url
+
   r = requests.get(url)
   soup = bs(r.content, features="html.parser")
 
   page_title = " ".join(soup.title.get_text().split())
 
-  for files in os.listdir(storage_directory):
-    if page_title in files:
-      build(files)
+  for filename in os.scandir(templates_directory):
+    html = filename.path.split("/")[1]
+    title = html.split(seperator)[0]
+    if title == page_title:
+      issue_report(html)
       break

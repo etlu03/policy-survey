@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup as bs
 from bs4.element import Comment
 from datetime import datetime
+
 import requests
 import json
 import re
