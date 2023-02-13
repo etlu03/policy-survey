@@ -26,7 +26,6 @@ out/
 package-lock.json
 
 # Storage files
-flaskr/templates/*
-!flaskr/templates/README.md
+flaskr/templates/policies/*
 storage/metadata/*
 !storage/metadata/README.md

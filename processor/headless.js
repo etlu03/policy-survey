@@ -3,7 +3,7 @@ const fs = require("fs");
 
 const seperator = " -- ";
 
-const flask_directory = "../flaskr/templates/";
+const flask_directory = "../flaskr/templates/policies/";
 const storage_directory = "../storage/metadata/";
 
 var filename = undefined;

@@ -8,10 +8,10 @@ import re
 import argparse
 import os
 
-concepts_src = "../storage/" + "objects.json"
-concepts_dst = "../storage/" + "concepts.txt"
+concepts_src = "../storage/objects.json"
+concepts_dst = "../storage/concepts.txt"
 
-metadata_dst = "metadata/"
+metadata_dst = "../storage/metadata/"
 
 def retrieve_keywords():
   if os.path.isfile(concepts_dst) == False:

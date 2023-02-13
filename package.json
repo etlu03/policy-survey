@@ -5,7 +5,7 @@
   "author": "etlu03",
   "description": "",
   "scripts": {
-    "start": "node scripts/headless.js"
+    "start": "cd flaskr && flask --app application run"
   },
   "dependencies": {
     "fs": "^0.0.1-security",
