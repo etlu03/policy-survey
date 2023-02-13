@@ -1,9 +1,12 @@
-from flask import Flask, render_template
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def home():
+  if request.method == "POST":
+    print(request.form.get("url"))
+    
   return render_template("./audit/home.html")
 
 if __name__ == "__main__":
