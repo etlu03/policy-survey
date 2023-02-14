@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template
 import asyncio
+from random import random
 
 app = Flask(__name__)
 
@@ -11,25 +12,32 @@ def home():
     
   return render_template("./audit/home.html")
 
-async def worker(url, queue):
+async def producer(item, queue):
+  print("Producer: Running")
+  await queue.put(item)
+  
+  await queue.put(None)
+  print("Producer: Done")
+
+async def consumer(queue):
+  print("Consumer: Running")
   while True:
-    sleep_for = await queue.get()
-    await asyncio.sleep(sleep_for)
-    queue.task_done()
+    try:
+      item = queue.get_nowait()
+    except asyncio.QueueEmpty:
+      await asyncio.sleep(0.5)
+      continue
     
+    if item is None:
+      break
+  
+    print(f'> got item: {item}')
+  
+  print("Consumer: Done")
+
 async def retrieve(url):
   queue = asyncio.Queue()
-  tasks = []
-
-  task = asyncio.create_task(worker(url, queue))
-  tasks.append(task)
-
-  await queue.join()
-
-  for task in tasks:
-    task.cancel()
-  
-  await asyncio.gather(*tasks, return_exceptions=True)
+  await asyncio.gather(producer(url, queue), consumer(queue))
 
 if __name__ == "__main__":
   app.run()
