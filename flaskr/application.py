@@ -1,16 +1,17 @@
 from flask import Flask, request, render_template
 import asyncio
-from random import random
 
 app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
+  '''
   if request.method == "POST":
-    url = request.form.get("url")
-    asyncio.run(retrieve(url))
-    
-  return render_template("./audit/home.html")
+    item = request.form.get("url")
+    asyncio.run(retrieve(item))
+  '''
+
+  return render_template("./default/waiting.html")
 
 async def producer(item, queue):
   print("Producer: Running")
@@ -35,9 +36,9 @@ async def consumer(queue):
   
   print("Consumer: Done")
 
-async def retrieve(url):
+async def retrieve(item):
   queue = asyncio.Queue()
-  await asyncio.gather(producer(url, queue), consumer(queue))
+  await asyncio.gather(producer(item, queue), consumer(queue))
 
 if __name__ == "__main__":
   app.run()
