@@ -107,5 +107,3 @@ def audit(url):
     
     with open(metadata + title + ".json", "w") as dst:
       json.dump(json_object, dst)
-
-audit("https://www.cmu.edu/legal/privacy-notice.html")
