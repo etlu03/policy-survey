@@ -27,5 +27,10 @@ package-lock.json
 
 # Storage files
 flaskr/templates/policies/*
-storage/metadata/*
-!storage/metadata/README.md
+
+flaskr/storage/*
+!flaskr/storage/objects.json
+
+!flaskr/storage/metadata
+flaskr/storage/metadata/*
+!flaskr/storage/metadata/README.md

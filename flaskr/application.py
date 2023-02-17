@@ -17,21 +17,28 @@ def home():
     asyncio.run(retrieve(item))
     if destination is not None:
       return render_template("./policies/" + destination)
+
+    return render_template("./default/waiting.html")
       
   return render_template("./default/home.html")
 
 def walk(url):
-  r = requests.get(url)
+  global destination
+  
+  try:
+    r = requests.get(url)
+  except requests.exceptions.InvalidURL:
+    return destination
+  
   soup = bs(r.content, features="html.parser")
   title = " ".join(soup.title.get_text().split())
   
-  global destination
   for filename in os.listdir("./templates/policies"):
     if filename.endswith(".html"):
       source = filename.split(seperator)[0]
       if source == title:
         destination = filename
-        
+      
   return destination
 
 async def producer(item, queue):
