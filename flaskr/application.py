@@ -5,6 +5,8 @@ import asyncio
 import requests
 import os
 
+import preprocessor
+
 app = Flask(__name__)
 seperator = " -- "
 
@@ -17,17 +19,25 @@ def home():
     asyncio.run(retrieve(item))
     if destination is not None:
       return render_template("./policies/" + destination)
-
+    
+    # if invalid url should not be waiting
     return render_template("./default/waiting.html")
       
   return render_template("./default/home.html")
 
 def walk(url):
+  # print("walking")
   global destination
+
+  if url is None:
+    return destination
   
+  print(url)
   try:
     r = requests.get(url)
   except requests.exceptions.InvalidURL:
+    return destination
+  except requests.exceptions.MissingSchema:
     return destination
   
   soup = bs(r.content, features="html.parser")
@@ -38,7 +48,7 @@ def walk(url):
       source = filename.split(seperator)[0]
       if source == title:
         destination = filename
-      
+  
   return destination
 
 async def producer(item, queue):
