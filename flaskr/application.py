@@ -17,39 +17,13 @@ def home():
   if request.method == "POST":
     item = request.form.get("url")
     asyncio.run(retrieve(item))
-    if destination is not None:
+
+    while destination is None:
+      return render_template("./default/waiting.html")
+    else:
       return render_template("./policies/" + destination)
-    
-    # if invalid url should not be waiting
-    return render_template("./default/waiting.html")
-      
+          
   return render_template("./default/home.html")
-
-def walk(url):
-  # print("walking")
-  global destination
-
-  if url is None:
-    return destination
-  
-  print(url)
-  try:
-    r = requests.get(url)
-  except requests.exceptions.InvalidURL:
-    return destination
-  except requests.exceptions.MissingSchema:
-    return destination
-  
-  soup = bs(r.content, features="html.parser")
-  title = " ".join(soup.title.get_text().split())
-  
-  for filename in os.listdir("./templates/policies"):
-    if filename.endswith(".html"):
-      source = filename.split(seperator)[0]
-      if source == title:
-        destination = filename
-  
-  return destination
 
 async def producer(item, queue):
   # print("Producer: Running")
@@ -80,5 +54,33 @@ async def retrieve(item):
   queue = asyncio.Queue()
   await asyncio.gather(producer(item, queue), consumer(queue))
 
+def walk(url):
+  # print("walking")
+  global destination
+  
+  try:
+    r = requests.get(url)
+  except requests.exceptions.InvalidURL:
+    return destination
+  except requests.exceptions.MissingSchema:
+    return destination
+  
+  soup = bs(r.content, features="html.parser")
+  title = " ".join(soup.title.get_text().split())
+  
+  for filename in os.listdir("./templates/policies"):
+    if filename.endswith(".html"):
+      source = filename.split(seperator)[0]
+      if source == title:
+        destination = filename
+  
+  return destination
+
+def processor(url):
+  preprocessor.parse(url)
+  os.system(f"node ./headless.js {url}")
+  
+
 if __name__ == "__main__":
-  app.run()
+  processor("https://www.cmu.edu/legal/privacy-notice.html")
+  # app.run()

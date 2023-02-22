@@ -7,10 +7,10 @@ import requests
 import re
 import os
 
-objects_json = "../storage/objects.json"
-concepts_txt = "../storage/concepts.txt"
+objects_json = "./storage/objects.json"
+concepts_txt = "./storage/concepts.txt"
 
-metadata = "../storage/metadata/"
+metadata = "./storage/metadata/"
 
 def visible(element):
   nonvisible_elements = {"style", "script", "head", "title", "meta", "[document]"}
@@ -69,7 +69,7 @@ def renew(title, timestamp):
 
   return True
   
-def audit(url):
+def parse(url):
   retrieve_keywords()
 
   r = requests.get(url)

@@ -3,8 +3,8 @@ const fs = require("fs");
 
 const seperator = " -- "
 
-const policies_directory = "../templates/policies/";
-const metadata_directory = "../storage/metadata/";
+const policies_directory = "./templates/policies/";
+const metadata_directory = "./storage/metadata/";
 
 var filename = undefined;
 
