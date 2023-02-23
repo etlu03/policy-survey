@@ -12,8 +12,11 @@ seperator = " -- "
 
 destination = None
 
-@app.route("/", methods=['GET', 'POST'])
+# @app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET"])
 def home():
+  return render_template("./default/base.html", title="test")
+  '''
   if request.method == "POST":
     item = request.form.get("url")
     asyncio.run(retrieve(item))
@@ -24,6 +27,7 @@ def home():
       return render_template("./policies/" + destination)
           
   return render_template("./default/home.html")
+  '''
 
 async def producer(item, queue):
   # print("Producer: Running")
@@ -80,7 +84,5 @@ def processor(url):
   preprocessor.parse(url)
   os.system(f"node ./headless.js {url}")
   
-
 if __name__ == "__main__":
-  processor("https://www.cmu.edu/legal/privacy-notice.html")
-  # app.run()
+  app.run()

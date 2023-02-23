@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> {{title}} </title>
+
+    <style>
+      html, body {
+        height: 100%;
+      }
+      .container {
+        border: 1px solid black;
+        height: 100%;
+      }
+      .header {
+        border: 1px solid black;
+        text-align: center;
+        height: 20%;
+      }
+      .content {
+        border: 1px solid black;
+        text-align: center;
+        height: 40%;
+      }
+      .footer {
+        border: 1px solid black;
+        text-align: center;
+        height: 20%;
+      }
+      .left-block {
+        display: inline-block;
+        border: 1px solid black;
+        text-align: center;
+        height: 100%;
+        width: 20%;
+      }
+      .center-block {
+        display: inline-block;
+        border: 1px solid black;
+        text-align: center;
+        height: 100%;
+        width: 50%;
+      }
+      .right-block {
+        display: inline-block;
+        border: 1px solid black;
+        text-align: center;
+        height: 100%;
+        width: 20%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <p> Header </p>
+      </div>
+      <div class="content">
+        <div class="left-block">
+          <p> Left </p>
+        </div>
+        <div class="center-block">
+          <p> Content </p>
+        </div>
+        <div class="right-block">
+          <p> Right </p>
+        </div>
+      </div>
+      <div class="footer">
+        <p> Footer </p>
+      </div>
+    </div>
+  </body>
+</html>
