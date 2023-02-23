@@ -52,7 +52,7 @@ def has_overlap(spans, current_span):
   return False
 
 def renew(title, timestamp):
-  src = f"metadata/{title}.json"
+  src = f"{metadata}{title}.json"
   if os.path.isfile(src):
     with open(src, "r") as json_file:
       json_dict = json.load(json_file)
@@ -96,14 +96,14 @@ def parse(url):
             spans.append(current_span)
  
     number_of_concepts = len(concepts)
-    found_concepts = list(concepts)
-    found_concepts.sort(key=len, reverse=True)
+    concepts = list(concepts)
+    concepts.sort(key=len, reverse=True)
 
     json_object = {"__url": url,
                    "__title": title,
                    "__timestamp": timestamp,
                    "__number_of_concepts": number_of_concepts,
-                   "__found_concepts": found_concepts}
+                   "__concepts": concepts}
     
     with open(metadata + title + ".json", "w") as dst:
       json.dump(json_object, dst)
