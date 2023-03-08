@@ -46,7 +46,7 @@ function renew(title, time) {
   const source_json = `${metadata_directory}${title}.json`;
   if (fs.existsSync(source_json)) {
     const json = JSON.parse(fs.readFileSync(source_json, {encoding:'utf8', flag:'r'}));
-    const yesterday = json.__time;
+    const yesterday = json.__time__;
     const today = time;
 
     const t1 = new Date(yesterday);
@@ -101,11 +101,11 @@ function process(title, text, time) {
   
   number_of_concepts = concepts.length;
 
-  const metadata = {"__url": url,
-                    "__title": title,
-                    "__time": time, 
-                    "__number_of_concepts": number_of_concepts,
-                    "__concepts": concepts};
+  const metadata = {"__url__": url,
+                    "__title__": title,
+                    "__time__": time, 
+                    "__number_of_concepts__": number_of_concepts,
+                    "__concepts__": concepts};
   
   const config = JSON.stringify(metadata)
 
@@ -113,6 +113,7 @@ function process(title, text, time) {
 }
 
 (async () => {
+  retrieve_keywords();
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
@@ -137,57 +138,36 @@ function process(title, text, time) {
   const time = retrieve_time();
 
   if (renew(title, time)) {
-    process(title, text, time)
-  }
+    process(title, text, time);
+    const json = JSON.parse(fs.readFileSync(`${metadata_directory}${title}.json`),
+      {encoding:'utf8', flag:'r'});
+    
+    const objects = json.__concepts__;
+    const timestamp = json.__time__;
 
-  const json = JSON.parse(fs.readFileSync(`${metadata_directory}${title}.json`),
-    {encoding:'utf8', flag:'r'});
-  
-  const objects = json.__concepts;
-  const timestamp = json.__time;
+    const filename = title + seperator + timestamp + ".html";
 
-  const filename = title + seperator + timestamp + ".html";
-
-  for (let i = 0; i < objects.length; i++) {
-    let re = new RegExp(`\\b${objects[i]}\\b`, "gi");
-    html = html.replace(re, `<span style="color:blue">${objects[i]}</span>`);
-  }
-
-  var first_instance = true;
-  const files = fs.readdirSync(`${policies_directory}`);
-  for (let i = 0; i < files.length; i++) {
-    let namespace = files[i].split(seperator, 2);
-    let name = namespace[0];
-    if (name === title) {
-      first_instance = false;
-
-      fs.rename(`${policies_directory}${files[i]}`, `${policies_directory}${filename}`,
-        (err) => {
-          if (err != null) {
-            console.log(err);
-            return;
-          }
-        });
-      
-      fs.writeFile(`${policies_directory}${filename}`, html, {encoding:"utf-8", flags:"w+"},
-        (err) => {
-          if (err != null) {
-            console.log(err);
-            return;
-          }
-        });
-      break;
+    for (let i = 0; i < objects.length; i++) {
+      let re = new RegExp(`\\b${objects[i]}\\b`, "gi");
+      html = html.replace(re, `<span style="color:blue">${objects[i]}</span>`);
     }
-  }
 
-  if (first_instance === true) {
-    fs.writeFile(`${policies_directory}${filename}`, html, {encoding:"utf-8", flags:"w+"}, 
-      (err) => {
-        if (err != null) {
-          console.error(err);
-          return;
-        }
-    });
+    var first_instance = true;
+    const files = fs.readdirSync(`${policies_directory}`);
+    for (let i = 0; i < files.length; i++) {
+      let namespace = files[i].split(seperator, 2);
+      let name = namespace[0];
+      if (name === title) {
+        first_instance = false;
+        fs.renameSync(`${policies_directory}${files[i]}`, `${policies_directory}${filename}`);
+        fs.writeFileSync(`${policies_directory}${filename}`, html, {encoding:"utf-8", flags:"w+"});
+        break;
+      }
+    }
+
+    if (first_instance === true) {
+      fs.writeFileSync(`${policies_directory}${filename}`, html, {encoding:"utf-8", flags:"w+"});
+    }
   }
 
   browser.close();
