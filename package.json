@@ -5,10 +5,10 @@
   "author": "etlu03",
   "description": "",
   "scripts": {
-    "start": "node ./flaskr/processor/headless.js https://www.cmu.edu/legal/privacy-notice.html"
+    "start": ""
   },
   "dependencies": {
     "fs": "^0.0.1-security",
-    "puppeteer": "^19.6.2"
+    "puppeteer": "^19.7.3"
   }
 }

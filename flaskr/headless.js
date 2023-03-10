@@ -1,15 +1,16 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
+const process = require('process');
 
 const seperator = " -- "
 
-const policies_directory = "./templates/policies/";
-const metadata_directory = "./storage/metadata/";
+const policies = "./templates/policies/";
+const metadata = "./storage/metadata/";
 
 const concepts_txt = "./storage/concepts.txt";
 const objects_json = "./storage/objects.json";
 
-const url = "https://www.cmu.edu/legal/privacy-notice.html";
+const url = process.argv[2];
 
 function retrieve_keywords() {
   if (!fs.existsSync(concepts_txt)) {
@@ -43,7 +44,7 @@ function retrieve_time() {
 }
 
 function renew(title, time) {
-  const source_json = `${metadata_directory}${title}.json`;
+  const source_json = `${metadata}${title}.json`;
   if (fs.existsSync(source_json)) {
     const json = JSON.parse(fs.readFileSync(source_json, {encoding:'utf8', flag:'r'}));
     const yesterday = json.__time__;
@@ -77,7 +78,7 @@ function has_overlap(matches, span) {
   return false;
 }
 
-function process(title, text, time) {
+function preprocess(title, text, time) {
   const data = fs.readFileSync(concepts_txt, {encoding:'utf8', flag:'r'});
   const keywords = data.split("\n");
 
@@ -101,20 +102,20 @@ function process(title, text, time) {
   
   number_of_concepts = concepts.length;
 
-  const metadata = {"__url__": url,
+  const parsed = {"__url__": url,
                     "__title__": title,
                     "__time__": time, 
                     "__number_of_concepts__": number_of_concepts,
                     "__concepts__": concepts};
   
-  const config = JSON.stringify(metadata)
+  const config = JSON.stringify(parsed)
 
-  fs.writeFileSync(`${metadata_directory}${title}.json`, config, {encoding:'utf8', flag:'w+'});
+  fs.writeFileSync(`${metadata}${title}.json`, config, {encoding:'utf8', flag:'w+'});
 }
 
 (async () => {
   retrieve_keywords();
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
 
   await page.setRequestInterception(true);
@@ -126,6 +127,7 @@ function process(title, text, time) {
   var html = await page.content();
   const title = await page.title();
 
+  await page.bringToFront();
   const text = await page.$eval('*', (el) => {
     const selection = window.getSelection();
     const range = document.createRange();
@@ -134,12 +136,12 @@ function process(title, text, time) {
     selection.addRange(range);
     return window.getSelection().toString();
   });
-
+  
   const time = retrieve_time();
 
   if (renew(title, time)) {
-    process(title, text, time);
-    const json = JSON.parse(fs.readFileSync(`${metadata_directory}${title}.json`),
+    preprocess(title, text, time);
+    const json = JSON.parse(fs.readFileSync(`${metadata}${title}.json`),
       {encoding:'utf8', flag:'r'});
     
     const objects = json.__concepts__;
@@ -153,21 +155,22 @@ function process(title, text, time) {
     }
 
     var first_instance = true;
-    const files = fs.readdirSync(`${policies_directory}`);
+    const files = fs.readdirSync(`${policies}`);
     for (let i = 0; i < files.length; i++) {
       let namespace = files[i].split(seperator, 2);
       let name = namespace[0];
       if (name === title) {
         first_instance = false;
-        fs.renameSync(`${policies_directory}${files[i]}`, `${policies_directory}${filename}`);
-        fs.writeFileSync(`${policies_directory}${filename}`, html, {encoding:"utf-8", flags:"w+"});
+        fs.renameSync(`${policies}${files[i]}`, `${policies}${filename}`);
+        fs.writeFileSync(`${policies}${filename}`, html, {encoding:"utf-8", flags:"w+"});
         break;
       }
     }
 
     if (first_instance === true) {
-      fs.writeFileSync(`${policies_directory}${filename}`, html, {encoding:"utf-8", flags:"w+"});
+      fs.writeFileSync(`${policies}${filename}`, html, {encoding:"utf-8", flags:"w+"});
     }
+
   }
 
   browser.close();
