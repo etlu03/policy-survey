@@ -79,5 +79,7 @@ def homepage():
     asyncio.run(routine(item))
     if destination is not None:
       return render_template("./policies/" + destination)
+    else:
+      return render_template("./static/loading.html")
 
   return render_template("./static/homepage.html")

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Loading ... </title>
+    <style> 
+      html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+      }
+      p {
+        font: 100px Times New Roman, sans-serif;
+      }
+      #content {
+        margin-left: 30%;
+      }
+    </style>
+    <script>
+      var i = 1;
+      function animate() {
+        var elem = document.getElementById("content");
+        const words = ["Loading", "Loading .", "Loading ..", "Loading ..."];
+        elem.innerHTML = words[i % words.length];
+        i++;
+      }
+      setInterval(animate, 500);
+    </script>
+  </head>
+  <body>
+    <p id="content"> Loading </p>
+  </body>
+</html>
